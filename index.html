@@ -793,28 +793,70 @@
         @media (max-width: 640px) {
             .header-content {
                 flex-direction: row;
-                gap: 8px;
-                padding: 0 4px;
+                gap: 0;
+                padding: 0 6px;
                 align-items: center;
-                justify-content: center;
+                justify-content: flex-start;
                 width: 100vw;
-                height: 48px;
+                height: 42px;
             }
             .header {
-                height: 48px;
-                min-height: 48px;
+                height: 42px;
+                min-height: 42px;
                 display: flex;
                 align-items: center;
-                justify-content: center;
+                justify-content: flex-start;
                 background: #4e6aff;
                 position: fixed;
                 top: 0;
                 left: 0;
                 right: 0;
                 z-index: 1000;
+                box-shadow: 0 2px 8px rgba(78,106,255,0.10);
+            }
+            .header-left {
+                flex-direction: row;
+                align-items: center;
+                gap: 8px;
+            }
+            .logo-container {
+                width: 28px;
+                height: 28px;
+                min-width: 28px;
+                min-height: 28px;
+                margin: 0 4px 0 0;
+                box-shadow: none;
+                padding: 0;
+                display: block;
+            }
+            .logo-container {
+                /* ...existing code... */
+            }
+            @media (max-width: 640px) {
+                .logo-container {
+                    display: none !important;
+                }
+            }
+            .header-title {
+                font-size: 13px;
+                font-weight: 700;
+                margin: 0;
+                color: #fff;
+                text-shadow: none;
+                line-height: 1.1;
+                max-width: 60vw;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            .header-subtitle {
+                display: none !important;
+            }
+            .header-stats {
+                display: none !important;
             }
             .main-layout {
-                margin-top: 38px;
+                margin-top: 42px;
                 padding-bottom: 4px;
             }
             .filter-panel {
@@ -959,11 +1001,19 @@
 </head>
 <body>
     <!-- Header -->
+    <!-- Loading Spinner Overlay -->
+    <div id="loading-overlay" style="position:fixed;z-index:3000;top:0;left:0;width:100vw;height:100vh;background:rgba(255,255,255,0.98);display:flex;align-items:center;justify-content:center;transition:opacity 0.3s;">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:18px;">
+            <div style="border:6px solid #e0e7ff;border-top:6px solid #4e6aff;border-radius:50%;width:54px;height:54px;animation:spin 1s linear infinite;"></div>
+            <div style="color:#4e6aff;font-weight:700;font-size:18px;">Loading map & data...</div>
+        </div>
+    </div>
+    <style>@keyframes spin{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}</style>
     <header class="header">
         <div class="header-content">
             <div class="header-left">
                 <div class="logo-container">
-                    <img src="./photos/aiba.jpg" alt="Army IBA Logo">
+                    <img src="./photos/aiba.jpg" alt="Army IBA Logo" loading="lazy">
                 </div>
                 <div class="header-text">
                     <div class="header-title">Army IBA Sylhet Student Home District Map</div>
@@ -1080,7 +1130,7 @@
                     <div class="sidebar-subtitle" id="sidebar-subtitle">Click a district to view students</div>
                 </div>
             </div>
-            <div class="sidebar-content">
+            <div class="sidebar-content" id="sidebar-content" style="display:none;">
                 <ul class="student-list" id="student-list"></ul>
             </div>
         </aside>
@@ -1157,6 +1207,10 @@
         </div>
     </footer>
     <script>
+    // Defer map/data loading until DOM is ready, show spinner, hide sidebar content until loaded
+    document.addEventListener('DOMContentLoaded', function() {
+        const loadingOverlay = document.getElementById('loading-overlay');
+        const sidebarContent = document.getElementById('sidebar-content');
         mapboxgl.accessToken = 'pk.eyJ1IjoiZ21yYWZpd2ViIiwiYSI6ImNtZHdlM29oZzAzZzIydXIzMXQyenBuMGcifQ.Y6LpUT3WYUpY6ScQW2pq1A';
         const map = new mapboxgl.Map({
             container: 'map',
@@ -1167,7 +1221,6 @@
 
         map.on('load', () => {
             let studentData = null;
-            
             // Load student data
             fetch('./student-data.json')
                 .then(response => response.json())
@@ -1178,8 +1231,9 @@
                 .catch(error => {
                     console.error('Error loading student data:', error);
                     alert('Error loading student data. Please check if student-data.json file exists.');
+                    if (loadingOverlay) loadingOverlay.style.display = 'none';
                 });
-            
+
             function initializeMap() {
                 // Update stats
                 document.getElementById('total-students').textContent = studentData.features.length;
@@ -1234,18 +1288,18 @@
                 });
 
                 // Click event
-        map.on('click', 'student-points', (e) => {
-            const district = e.features[0].properties.District;
-            const studentsInDistrict = studentData.features.filter(f => 
-                f.properties.District === district
-            );
-            // Update sidebar
-            document.getElementById('sidebar-title').textContent = district;
-            document.getElementById('sidebar-subtitle').textContent = 
-                `${studentsInDistrict.length} student${studentsInDistrict.length > 1 ? 's' : ''} from this district`;
-            showDistrictStudents(studentsInDistrict);
-            openSidebarIfMobile();
-        });
+                map.on('click', 'student-points', (e) => {
+                    const district = e.features[0].properties.District;
+                    const studentsInDistrict = studentData.features.filter(f => 
+                        f.properties.District === district
+                    );
+                    // Update sidebar
+                    document.getElementById('sidebar-title').textContent = district;
+                    document.getElementById('sidebar-subtitle').textContent = 
+                        `${studentsInDistrict.length} student${studentsInDistrict.length > 1 ? 's' : ''} from this district`;
+                    showDistrictStudents(studentsInDistrict);
+                    openSidebarIfMobile();
+                });
 
                 // Hover popup
                 const popup = new mapboxgl.Popup({
@@ -1255,12 +1309,10 @@
 
                 map.on('mouseenter', 'student-points', (e) => {
                     map.getCanvas().style.cursor = 'pointer';
-                    
                     const district = e.features[0].properties.District;
                     const count = studentData.features.filter(f => 
                         f.properties.District === district
                     ).length;
-                    
                     popup.setLngLat(e.lngLat)
                         .setHTML(`
                             <div class="popup-title">${district}</div>
@@ -1316,11 +1368,10 @@
 
                 batchFilter.addEventListener('change', applyFilters);
                 districtFilter.addEventListener('change', applyFilters);
-                
+
                 function showDistrictStudents(students) {
                     const studentList = document.getElementById('student-list');
                     studentList.innerHTML = '';
-                    
                     // Group by batch
                     const byBatch = {};
                     students.forEach(student => {
@@ -1328,99 +1379,76 @@
                         if (!byBatch[batch]) byBatch[batch] = [];
                         byBatch[batch].push(student.properties.Name);
                     });
-                    
                     Object.keys(byBatch).sort().forEach(batch => {
                         // Batch header
                         const batchHeader = document.createElement('li');
                         batchHeader.className = 'batch-group';
                         batchHeader.textContent = `${batch} (${byBatch[batch].length} students)`;
                         studentList.appendChild(batchHeader);
-                        
                         // Students
                         byBatch[batch].forEach(name => {
                             const item = document.createElement('li');
                             item.className = 'student-item';
-                            item.innerHTML = `
-                                <div class="student-name">${name}</div>
-                            `;
+                            item.innerHTML = `<div class="student-name">${name}</div>`;
                             studentList.appendChild(item);
                         });
                     });
                 }
-                
+
                 function showAllStudents() {
                     const studentList = document.getElementById('student-list');
                     studentList.innerHTML = '';
-                    
                     // Summary
                     const summary = document.createElement('li');
                     summary.className = 'summary-info';
-                    summary.innerHTML = `
-                        <div class="summary-number">${studentData.features.length}</div>
-                        <div class="summary-text">Total Students from ${[...new Set(studentData.features.map(f => f.properties.District))].length} Districts</div>
-                    `;
+                    summary.innerHTML = `<div class="summary-number">${studentData.features.length}</div><div class="summary-text">Total Students from ${[...new Set(studentData.features.map(f => f.properties.District))].length} Districts</div>`;
                     studentList.appendChild(summary);
-                    
                     // Group by district
                     const byDistrict = {};
                     studentData.features.forEach(student => {
                         const district = student.properties.District;
                         if (!byDistrict[district]) byDistrict[district] = {};
-                        
                         const batch = student.properties.Batch;
                         if (!byDistrict[district][batch]) byDistrict[district][batch] = [];
                         byDistrict[district][batch].push(student.properties.Name);
                     });
-                    
                     Object.keys(byDistrict).sort().forEach(district => {
                         const districtSection = document.createElement('div');
                         districtSection.className = 'district-section';
-                        
                         // District header
                         const header = document.createElement('li');
                         header.className = 'district-header';
                         const totalStudents = Object.values(byDistrict[district]).flat().length;
                         header.textContent = `${district} (${totalStudents} students)`;
                         districtSection.appendChild(header);
-                        
                         Object.keys(byDistrict[district]).sort().forEach(batch => {
                             // Batch group
                             const batchHeader = document.createElement('li');
                             batchHeader.className = 'batch-group';
                             batchHeader.textContent = `${batch} (${byDistrict[district][batch].length} students)`;
                             districtSection.appendChild(batchHeader);
-                            
                             // Students
                             byDistrict[district][batch].forEach(name => {
                                 const item = document.createElement('li');
                                 item.className = 'student-item';
-                                item.innerHTML = `
-                                    <div class="student-name">${name}</div>
-                                `;
+                                item.innerHTML = `<div class=\"student-name\">${name}</div>`;
                                 districtSection.appendChild(item);
                             });
                         });
-                        
                         studentList.appendChild(districtSection);
                     });
                 }
-                
+
                 function showBatchStudents(batch) {
                     const studentList = document.getElementById('student-list');
                     studentList.innerHTML = '';
-                    
                     const filteredStudents = studentData.features.filter(f => f.properties.Batch === batch);
                     const districts = [...new Set(filteredStudents.map(f => f.properties.District))];
-                    
                     // Summary
                     const summary = document.createElement('li');
                     summary.className = 'summary-info';
-                    summary.innerHTML = `
-                        <div class="summary-number">${filteredStudents.length}</div>
-                        <div class="summary-text">${batch} Students from ${districts.length} Districts</div>
-                    `;
+                    summary.innerHTML = `<div class="summary-number">${filteredStudents.length}</div><div class="summary-text">${batch} Students from ${districts.length} Districts</div>`;
                     studentList.appendChild(summary);
-                    
                     // Group by district
                     const byDistrict = {};
                     filteredStudents.forEach(student => {
@@ -1428,30 +1456,31 @@
                         if (!byDistrict[district]) byDistrict[district] = [];
                         byDistrict[district].push(student.properties.Name);
                     });
-                    
                     Object.keys(byDistrict).sort().forEach(district => {
                         // District header
                         const header = document.createElement('li');
                         header.className = 'district-header';
                         header.textContent = `${district} (${byDistrict[district].length} students)`;
                         studentList.appendChild(header);
-                        
                         // Students
                         byDistrict[district].forEach(name => {
                             const item = document.createElement('li');
                             item.className = 'student-item';
-                            item.innerHTML = `
-                                <div class="student-name">${name}</div>
-                            `;
+                            item.innerHTML = `<div class=\"student-name\">${name}</div>`;
                             studentList.appendChild(item);
                         });
                     });
                 }
-                
+
                 // Initialize with all students
                 showAllStudents();
+
+                // Hide spinner, show sidebar content
+                if (loadingOverlay) loadingOverlay.style.display = 'none';
+                if (sidebarContent) sidebarContent.style.display = '';
             }
         });
+    });
     </script>
 </body>
 </html>
