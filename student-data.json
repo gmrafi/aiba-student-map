@@ -1,0 +1,437 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Sabrina Safa",
+        "Batch": "BBA 10",
+        "District": "Dinajpur"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [88.64, 25.63]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Md Sadir Hossain",
+        "Batch": "BBA 10",
+        "District": "Dinajpur"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [88.64, 25.63]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Md. Mahadi Istiak",
+        "Batch": "BBA 10",
+        "District": "Dinajpur"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [88.64, 25.63]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Md. Tanvir Islam Sarder",
+        "Batch": "BBA 10",
+        "District": "Rajshahi"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [88.6, 24.37]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Samia Rahaman",
+        "Batch": "BBA 10",
+        "District": "Pabna"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [89.24, 24.01]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Md Fahim Firose Shimul",
+        "Batch": "BBA 11",
+        "District": "Dinajpur"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [88.64, 25.63]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Shaymon Khan Pranto",
+        "Batch": "BBA 11",
+        "District": "Natore"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [88.99, 24.41]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Md. Tanvir Rahman",
+        "Batch": "BBA 11",
+        "District": "Rajshahi"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [88.6, 24.37]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "K.M.Nadimul Islam",
+        "Batch": "BBA 11",
+        "District": "Bogura"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [89.37, 24.85]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "MD Golam Mubasshir Rafi",
+        "Batch": "BBA 11",
+        "District": "Dinajpur"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [88.64, 25.63]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Mashrura Meshkat Punno",
+        "Batch": "BBA 11",
+        "District": "Kurigram"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [89.65, 25.81]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "M.z.m zahin",
+        "Batch": "BBA 11",
+        "District": "Nilphamari"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [88.85, 25.93]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Sanila Subhana",
+        "Batch": "BBA 11",
+        "District": "Rajshahi"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [88.6, 24.37]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Fariha Fairuz Proma",
+        "Batch": "BBA 11",
+        "District": "Thakurgaon"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [88.47, 26.03]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Minhajul Islam",
+        "Batch": "BBA 11",
+        "District": "Rajshahi"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [88.6, 24.37]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Hrydita Binte Razzaque Riya",
+        "Batch": "BBA 11",
+        "District": "Naogaon"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [88.95, 24.91]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Md. Shahin Islam Shawon",
+        "Batch": "BBA 12",
+        "District": "Bogura"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [89.37, 24.85]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "A. Z. M. Nasrullah",
+        "Batch": "BBA 12",
+        "District": "Kurigram"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [89.65, 25.81]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Shahnaz parvin popy",
+        "Batch": "BBA 12",
+        "District": "Naogaon"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [88.95, 24.91]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Md. Shafaeat Afnan",
+        "Batch": "BBA 12",
+        "District": "Natore"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [88.99, 24.41]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Ismita Jahan",
+        "Batch": "BBA 12",
+        "District": "Natore"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [88.99, 24.41]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Alif Azad Kame Sajan",
+        "Batch": "BBA 12",
+        "District": "Pabna"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [89.24, 24.01]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Md. Naeem Babu",
+        "Batch": "BBA 12",
+        "District": "Pabna"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [89.24, 24.01]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Sadeka Sumaiya Mim",
+        "Batch": "BBA 12",
+        "District": "Rangpur"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [89.25, 25.74]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "MD SHARIAR RAHMAN SHAD",
+        "Batch": "BBA 12",
+        "District": "Rajshahi"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [88.6, 24.37]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Md.Waseq Amin Rayat",
+        "Batch": "BBA 12",
+        "District": "Thakurgaon"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [88.47, 26.03]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Samjid Hossain Shoukhin",
+        "Batch": "BBA 12",
+        "District": "Kurigram"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [89.65, 25.81]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Tafhimul Haque",
+        "Batch": "BBA 12",
+        "District": "Rajshahi"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [88.6, 24.37]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Md. Jobaer Alom Amit",
+        "Batch": "BBA 12",
+        "District": "Bogura"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [89.37, 24.85]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Saju sikdar",
+        "Batch": "BBA 12",
+        "District": "Kurigram"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [89.65, 25.81]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Md.Mohimenul Islam Reduwan",
+        "Batch": "BBA 12",
+        "District": "Lalmonirhat"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [89.44, 25.91]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Md.Hasin Ishraq",
+        "Batch": "BBA 12",
+        "District": "Nilphamari"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [88.85, 25.93]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Nusrat Jahan Nayma",
+        "Batch": "BBA 12",
+        "District": "Panchagarh"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [88.56, 26.33]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Mir Asif Us Zaman",
+        "Batch": "BBA 12",
+        "District": "Rangpur"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [89.25, 25.74]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "MD.Omor Faruk",
+        "Batch": "BBA 12",
+        "District": "Rangpur"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [89.25, 25.74]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Israt zarin ruponty",
+        "Batch": "BBA 12",
+        "District": "Rajshahi"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [88.6, 24.37]
+      }
+    }
+  ]
+}
