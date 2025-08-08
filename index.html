@@ -471,6 +471,18 @@
                 white-space: normal;
                 overflow: visible;
             }
+            .header-subtitle {
+                font-size: 10px;
+                text-align: center;
+                color: #e0e7ff;
+                opacity: 0.95;
+                margin-bottom: 6px;
+                line-height: 1.1;
+                max-width: 90vw;
+                white-space: normal;
+                overflow: visible;
+                display: block !important;
+            }
             .header-stats {
                 background: #fff;
                 color: #4e6aff;
@@ -490,7 +502,6 @@
                 color: #4e6aff;
                 margin-bottom: 0;
             }
-            .header-subtitle, .header-title-sub { display: none !important; }
             .sidebar-toggle { display: none !important; }
             .main-layout {
                 margin-top: 48px;
@@ -736,7 +747,10 @@
                 <div class="logo-container">
                     <img src="./photos/aiba.jpg" alt="Army IBA Logo">
                 </div>
-                <div class="header-title">Army IBA Sylhet Student Home District Map</div>
+                <div class="header-text">
+                    <div class="header-title">Army IBA Sylhet Student Home District Map</div>
+                    <div class="header-subtitle">Interactive visualization of student demographics across Bangladesh</div>
+                </div>
             </div>
             <div class="header-stats">
                 <div class="stats-number" id="total-students">36</div>
