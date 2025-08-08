@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Army IBA Sylhet Student Directory</title>
+  <meta name="description" content="Directory of Army IBA Sylhet students. Search and filter by name, batch, or district.">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f8fffe;
+      color: #1a202c;
+      margin: 0;
+      padding: 0;
+    }
+    .directory-header {
+      background: #4e6aff;
+      color: #fff;
+      padding: 32px 0 18px 0;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+    .directory-title {
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+      letter-spacing: -0.5px;
+    }
+    .directory-subtitle {
+      font-size: 1.1rem;
+      opacity: 0.92;
+      font-weight: 400;
+    }
+    .search-bar {
+      margin: 24px auto 18px auto;
+      max-width: 420px;
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+    }
+    .search-bar input, .search-bar select {
+      padding: 10px 14px;
+      border: 2px solid #e5e7eb;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-family: inherit;
+      outline: none;
+      transition: border 0.2s;
+    }
+    .search-bar input:focus, .search-bar select:focus {
+      border-color: #4e6aff;
+    }
+    .directory-list {
+      max-width: 900px;
+      margin: 0 auto 40px auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 22px;
+      padding: 0 12px;
+    }
+    .student-card {
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 4px 18px rgba(16,185,129,0.10), 0 1.5px 0 #bbf7d0 inset;
+      border: 1.5px solid #34d399;
+      padding: 22px 20px 18px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      transition: box-shadow 0.2s, transform 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .student-card:hover {
+      box-shadow: 0 8px 32px rgba(255, 171, 64, 0.18), 0 2px 8px #ffe0b2 inset;
+      transform: translateY(-2px) scale(1.015);
+    }
+    .student-avatar {
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #ffe0b2 0%, #f8bbd0 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.7rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 8px;
+      box-shadow: 0 2px 8px rgba(255,171,64,0.10);
+      border: 2.5px solid #fff7ed;
+      align-self: center;
+    }
+    .student-name {
+      font-size: 1.18rem;
+      font-weight: 700;
+      color: #1a237e;
+      margin-bottom: 2px;
+      text-align: center;
+      letter-spacing: -0.2px;
+    }
+    .student-meta {
+      display: flex;
+      gap: 10px;
+      font-size: 0.98rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .meta-batch {
+      background: #d1fae5;
+      color: #059669;
+      padding: 2px 10px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+    .meta-district {
+      background: #e0e7ff;
+      color: #2563eb;
+      padding: 2px 10px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+    @media (max-width: 600px) {
+      .directory-header {
+        padding: 18px 0 10px 0;
+      }
+      .directory-title {
+        font-size: 1.2rem;
+      }
+      .directory-subtitle {
+        font-size: 0.95rem;
+      }
+      .directory-list {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+      .student-card {
+        padding: 12px 10px 10px 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="directory-header">
+    <div class="directory-title">Army IBA Sylhet Student Directory</div>
+    <div class="directory-subtitle">Browse, search, and filter all students by name, batch, or home district</div>
+  </header>
+  <div class="search-bar">
+    <input type="text" id="searchInput" placeholder="Search by name...">
+    <select id="batchSelect">
+      <option value="">All Batches</option>
+      <option value="BBA 7">BBA 7</option>
+      <option value="BBA 8">BBA 8</option>
+      <option value="BBA 9">BBA 9</option>
+      <option value="BBA 10">BBA 10</option>
+      <option value="BBA 11">BBA 11</option>
+      <option value="BBA 12">BBA 12</option>
+      <option value="BBA 13">BBA 13</option>
+    </select>
+    <select id="districtSelect">
+      <option value="">All Districts</option>
+      <option value="Bagerhat">Bagerhat</option>
+      <option value="Bandarban">Bandarban</option>
+      <option value="Barguna">Barguna</option>
+      <option value="Barisal">Barisal</option>
+      <option value="Bhola">Bhola</option>
+      <option value="Bogra">Bogra</option>
+      <option value="Brahmanbaria">Brahmanbaria</option>
+      <option value="Chandpur">Chandpur</option>
+      <option value="Chattogram">Chattogram</option>
+      <option value="Chuadanga">Chuadanga</option>
+      <option value="Comilla">Comilla</option>
+      <option value="Cox's Bazar">Cox's Bazar</option>
+      <option value="Dhaka">Dhaka</option>
+      <option value="Dinajpur">Dinajpur</option>
+      <option value="Faridpur">Faridpur</option>
+      <option value="Feni">Feni</option>
+      <option value="Gaibandha">Gaibandha</option>
+      <option value="Gazipur">Gazipur</option>
+      <option value="Gopalganj">Gopalganj</option>
+      <option value="Habiganj">Habiganj</option>
+      <option value="Jamalpur">Jamalpur</option>
+      <option value="Jessore">Jessore</option>
+      <option value="Jhalokati">Jhalokati</option>
+      <option value="Jhenaidah">Jhenaidah</option>
+      <option value="Joypurhat">Joypurhat</option>
+      <option value="Khagrachari">Khagrachari</option>
+      <option value="Khulna">Khulna</option>
+      <option value="Kishoreganj">Kishoreganj</option>
+      <option value="Kurigram">Kurigram</option>
+      <option value="Kushtia">Kushtia</option>
+      <option value="Lakshmipur">Lakshmipur</option>
+      <option value="Lalmonirhat">Lalmonirhat</option>
+      <option value="Madaripur">Madaripur</option>
+      <option value="Magura">Magura</option>
+      <option value="Manikganj">Manikganj</option>
+      <option value="Meherpur">Meherpur</option>
+      <option value="Maulvibazar">Maulvibazar</option>
+      <option value="Munshiganj">Munshiganj</option>
+      <option value="Mymensingh">Mymensingh</option>
+      <option value="Naogaon">Naogaon</option>
+      <option value="Narail">Narail</option>
+      <option value="Narayanganj">Narayanganj</option>
+      <option value="Narsingdi">Narsingdi</option>
+      <option value="Natore">Natore</option>
+      <option value="Nawabganj">Nawabganj</option>
+      <option value="Netrokona">Netrokona</option>
+      <option value="Nilphamari">Nilphamari</option>
+      <option value="Noakhali">Noakhali</option>
+      <option value="Pabna">Pabna</option>
+      <option value="Panchagarh">Panchagarh</option>
+      <option value="Patuakhali">Patuakhali</option>
+      <option value="Pirojpur">Pirojpur</option>
+      <option value="Rajbari">Rajbari</option>
+      <option value="Rajshahi">Rajshahi</option>
+      <option value="Rangamati">Rangamati</option>
+      <option value="Rangpur">Rangpur</option>
+      <option value="Satkhira">Satkhira</option>
+      <option value="Shariatpur">Shariatpur</option>
+      <option value="Sherpur">Sherpur</option>
+      <option value="Sirajganj">Sirajganj</option>
+      <option value="Sunamganj">Sunamganj</option>
+      <option value="Sylhet">Sylhet</option>
+      <option value="Tangail">Tangail</option>
+      <option value="Thakurgaon">Thakurgaon</option>
+    </select>
+  </div>
+  <div class="directory-list" id="directoryList">
+    <!-- Student cards will be injected here -->
+  </div>
+  <script>
+    let students = [];
+    // Load student data from the same JSON as the map
+    fetch('./student-data.json')
+      .then(res => res.json())
+      .then(data => {
+        students = data.features.map(f => f.properties);
+        renderDirectory(students);
+      });
+    function renderDirectory(list) {
+      const container = document.getElementById('directoryList');
+      container.innerHTML = '';
+      if (list.length === 0) {
+        container.innerHTML = '<div style="grid-column:1/-1;text-align:center;color:#4e6aff;font-weight:600;">No students found.</div>';
+        return;
+      }
+      list.forEach(student => {
+        const card = document.createElement('div');
+        card.className = 'student-card';
+        // Demo placeholders
+  const demoEmail = 'demo@demo.com';
+        const demoMobile = '01712345678';
+        const demoBlood = 'O+';
+        card.innerHTML = `
+          <div class="student-name">${student.Name}</div>
+          <div class="student-meta">
+            <span class="meta-batch">${student.Batch}</span>
+            <span class="meta-district">${student.District}</span>
+          </div>
+          <div style="margin:6px 0 0 0;text-align:center;font-size:0.99rem;color:#059669;font-weight:600;letter-spacing:-0.1px;"><span style="color:#2563eb;">Student, Army IBA Sylhet</span></div>
+          <div class="student-meta" style="margin-top:4px;">
+            <span style="background:#fef3c7;color:#b45309;padding:2px 10px;border-radius:8px;font-weight:600;font-size:0.95rem;">${demoMobile}</span>
+            <span style="background:#e0e7ff;color:#4e6aff;padding:2px 10px;border-radius:8px;font-weight:600;font-size:0.95rem;">${demoEmail}</span>
+            <span style="background:#fee2e2;color:#b91c1c;padding:2px 10px;border-radius:8px;font-weight:600;font-size:0.95rem;">${demoBlood}</span>
+          </div>
+          <div class="student-meta" style="margin-top:8px;justify-content:center;gap:16px;">
+            <a href="#" title="Facebook" style="display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;background:#e7f3ff;border-radius:50%;color:#1877f3;text-decoration:none;font-size:1.3rem;box-shadow:0 1px 4px #e0e7ff;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M22.675 0h-21.35C.595 0 0 .592 0 1.326v21.348C0 23.406.595 24 1.325 24h11.495v-9.294H9.692v-3.622h3.128V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.797.143v3.24l-1.918.001c-1.504 0-1.797.715-1.797 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116C23.406 24 24 23.406 24 22.674V1.326C24 .592 23.406 0 22.675 0"/></svg>
+            </a>
+            <a href="#" title="LinkedIn" style="display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;background:#e6f4f1;border-radius:50%;color:#0a66c2;text-decoration:none;font-size:1.3rem;box-shadow:0 1px 4px #e0e7ff;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-10h3v10zm-1.5-11.268c-.966 0-1.75-.784-1.75-1.75s.784-1.75 1.75-1.75 1.75.784 1.75 1.75-.784 1.75-1.75 1.75zm15.5 11.268h-3v-5.604c0-1.337-.025-3.063-1.868-3.063-1.868 0-2.154 1.459-2.154 2.968v5.699h-3v-10h2.881v1.367h.041c.401-.761 1.379-1.563 2.841-1.563 3.039 0 3.6 2.001 3.6 4.601v5.595z"/></svg>
+            </a>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+    // Search and filter functionality
+    document.getElementById('searchInput').addEventListener('input', filterDirectory);
+    document.getElementById('batchSelect').addEventListener('change', filterDirectory);
+    document.getElementById('districtSelect').addEventListener('change', filterDirectory);
+    function filterDirectory() {
+      const search = document.getElementById('searchInput').value.toLowerCase();
+      const batch = document.getElementById('batchSelect').value;
+      const district = document.getElementById('districtSelect').value;
+      let filtered = students.filter(s =>
+        (!search || s.Name.toLowerCase().includes(search)) &&
+        (!batch || s.Batch === batch) &&
+        (!district || s.District === district)
+      );
+      renderDirectory(filtered);
+    }
+  </script>
+</body>
+</html>
