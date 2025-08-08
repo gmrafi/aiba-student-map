@@ -792,21 +792,21 @@
 
         @media (max-width: 640px) {
             .header-content {
-                flex-direction: row;
+                flex-direction: column;
                 gap: 0;
-                padding: 0 6px;
-                align-items: center;
+                padding: 0 4vw;
+                align-items: flex-start;
                 justify-content: flex-start;
                 width: 100vw;
-                height: 42px;
+                height: auto;
             }
             .header {
-                height: 42px;
-                min-height: 42px;
+                min-height: 0;
+                height: auto;
                 display: flex;
-                align-items: center;
+                align-items: flex-start;
                 justify-content: flex-start;
-                background: #4e6aff;
+                background: #3a4bb7;
                 position: fixed;
                 top: 0;
                 left: 0;
@@ -815,48 +815,45 @@
                 box-shadow: 0 2px 8px rgba(78,106,255,0.10);
             }
             .header-left {
-                flex-direction: row;
-                align-items: center;
-                gap: 8px;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0;
+                width: 100vw;
             }
             .logo-container {
-                width: 28px;
-                height: 28px;
-                min-width: 28px;
-                min-height: 28px;
-                margin: 0 4px 0 0;
-                box-shadow: none;
-                padding: 0;
-                display: block;
-            }
-            .logo-container {
-                /* ...existing code... */
-            }
-            @media (max-width: 640px) {
-                .logo-container {
-                    display: none !important;
-                }
+                display: none !important;
             }
             .header-title {
-                font-size: 13px;
-                font-weight: 700;
-                margin: 0;
+                font-size: 4.7vw;
+                font-weight: 800;
+                margin: 8px 0 0 0;
                 color: #fff;
-                text-shadow: none;
-                line-height: 1.1;
-                max-width: 60vw;
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
+                text-shadow: 0 1px 2px rgba(0,0,0,0.08);
+                line-height: 1.15;
+                max-width: 92vw;
+                white-space: normal;
+                overflow: visible;
+                text-overflow: unset;
+                text-align: center;
+                letter-spacing: -0.5px;
             }
             .header-subtitle {
-                display: none !important;
+                display: block !important;
+                font-size: 3.2vw;
+                color: #e0e7ff;
+                opacity: 0.98;
+                margin: 2px 0 8px 0;
+                line-height: 1.2;
+                max-width: 92vw;
+                white-space: normal;
+                overflow: visible;
+                text-align: center;
             }
             .header-stats {
                 display: none !important;
             }
             .main-layout {
-                margin-top: 42px;
+                margin-top: 54px;
                 padding-bottom: 4px;
             }
             .filter-panel {
@@ -1212,14 +1209,32 @@
         const loadingOverlay = document.getElementById('loading-overlay');
         const sidebarContent = document.getElementById('sidebar-content');
         mapboxgl.accessToken = 'pk.eyJ1IjoiZ21yYWZpd2ViIiwiYSI6ImNtZHdlM29oZzAzZzIydXIzMXQyenBuMGcifQ.Y6LpUT3WYUpY6ScQW2pq1A';
+
+        // Mobile map optimizations
+        function isMobile() {
+            return window.innerWidth <= 640;
+        }
         const map = new mapboxgl.Map({
             container: 'map',
             style: 'mapbox://styles/gmrafiweb/cme2bz9rc00zm01qs8le6e72v',
-            center: [89.451, 25.576],
-            zoom: 7.48
+            center: isMobile() ? [90.4, 23.7] : [89.451, 25.576],
+            zoom: isMobile() ? 6.2 : 7.48,
+            pitchWithRotate: false,
+            dragRotate: false,
+            touchPitch: false,
+            attributionControl: false
         });
+        if (isMobile()) {
+            map.scrollZoom.disable();
+            map.doubleClickZoom.disable();
+            map.touchZoomRotate.enable();
+        }
 
         map.on('load', () => {
+            // Force map resize for mobile to fix rendering issues
+            if (isMobile()) {
+                setTimeout(() => map.resize(), 350);
+            }
             let studentData = null;
             // Load student data
             fetch('./student-data.json')
