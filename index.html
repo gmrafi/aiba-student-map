@@ -987,6 +987,74 @@
                     <option value="BBA 12">BBA 12</option>
                     <option value="BBA 13">BBA 13</option>
                 </select>
+                <div class="filter-label" style="margin-top:10px;">Filter by Home District</div>
+                <select id="district-filter" class="batch-select">
+                    <option value="all">All Districts</option>
+                    <option value="Bagerhat">Bagerhat</option>
+                    <option value="Bandarban">Bandarban</option>
+                    <option value="Barguna">Barguna</option>
+                    <option value="Barisal">Barisal</option>
+                    <option value="Bhola">Bhola</option>
+                    <option value="Bogra">Bogra</option>
+                    <option value="Brahmanbaria">Brahmanbaria</option>
+                    <option value="Chandpur">Chandpur</option>
+                    <option value="Chattogram">Chattogram</option>
+                    <option value="Chuadanga">Chuadanga</option>
+                    <option value="Comilla">Comilla</option>
+                    <option value="Cox's Bazar">Cox's Bazar</option>
+                    <option value="Dhaka">Dhaka</option>
+                    <option value="Dinajpur">Dinajpur</option>
+                    <option value="Faridpur">Faridpur</option>
+                    <option value="Feni">Feni</option>
+                    <option value="Gaibandha">Gaibandha</option>
+                    <option value="Gazipur">Gazipur</option>
+                    <option value="Gopalganj">Gopalganj</option>
+                    <option value="Habiganj">Habiganj</option>
+                    <option value="Jamalpur">Jamalpur</option>
+                    <option value="Jessore">Jessore</option>
+                    <option value="Jhalokati">Jhalokati</option>
+                    <option value="Jhenaidah">Jhenaidah</option>
+                    <option value="Joypurhat">Joypurhat</option>
+                    <option value="Khagrachari">Khagrachari</option>
+                    <option value="Khulna">Khulna</option>
+                    <option value="Kishoreganj">Kishoreganj</option>
+                    <option value="Kurigram">Kurigram</option>
+                    <option value="Kushtia">Kushtia</option>
+                    <option value="Lakshmipur">Lakshmipur</option>
+                    <option value="Lalmonirhat">Lalmonirhat</option>
+                    <option value="Madaripur">Madaripur</option>
+                    <option value="Magura">Magura</option>
+                    <option value="Manikganj">Manikganj</option>
+                    <option value="Meherpur">Meherpur</option>
+                    <option value="Maulvibazar">Maulvibazar</option>
+                    <option value="Munshiganj">Munshiganj</option>
+                    <option value="Mymensingh">Mymensingh</option>
+                    <option value="Naogaon">Naogaon</option>
+                    <option value="Narail">Narail</option>
+                    <option value="Narayanganj">Narayanganj</option>
+                    <option value="Narsingdi">Narsingdi</option>
+                    <option value="Natore">Natore</option>
+                    <option value="Nawabganj">Nawabganj</option>
+                    <option value="Netrokona">Netrokona</option>
+                    <option value="Nilphamari">Nilphamari</option>
+                    <option value="Noakhali">Noakhali</option>
+                    <option value="Pabna">Pabna</option>
+                    <option value="Panchagarh">Panchagarh</option>
+                    <option value="Patuakhali">Patuakhali</option>
+                    <option value="Pirojpur">Pirojpur</option>
+                    <option value="Rajbari">Rajbari</option>
+                    <option value="Rajshahi">Rajshahi</option>
+                    <option value="Rangamati">Rangamati</option>
+                    <option value="Rangpur">Rangpur</option>
+                    <option value="Satkhira">Satkhira</option>
+                    <option value="Shariatpur">Shariatpur</option>
+                    <option value="Sherpur">Sherpur</option>
+                    <option value="Sirajganj">Sirajganj</option>
+                    <option value="Sunamganj">Sunamganj</option>
+                    <option value="Sylhet">Sylhet</option>
+                    <option value="Tangail">Tangail</option>
+                    <option value="Thakurgaon">Thakurgaon</option>
+                </select>
             </div>
         </div>
         <!-- Sidebar -->
@@ -1196,25 +1264,47 @@
                     popup.remove();
                 });
 
-                // Batch filter
-                document.getElementById('batch-filter').addEventListener('change', (e) => {
-                    const batch = e.target.value;
-                    const filter = batch === 'all' ? null : ['==', 'Batch', batch];
-                    
+                // Batch and District filter
+                const batchFilter = document.getElementById('batch-filter');
+                const districtFilter = document.getElementById('district-filter');
+
+                function applyFilters() {
+                    const batch = batchFilter.value;
+                    const district = districtFilter.value;
+                    let filter = null;
+                    if (batch !== 'all' && district !== 'all') {
+                        filter = ['all', ['==', 'Batch', batch], ['==', 'District', district]];
+                    } else if (batch !== 'all') {
+                        filter = ['==', 'Batch', batch];
+                    } else if (district !== 'all') {
+                        filter = ['==', 'District', district];
+                    }
                     map.setFilter('student-points', filter);
                     map.setFilter('student-heatmap', filter);
-                    
+
                     // Update sidebar
-                    if (batch === 'all') {
+                    if (batch === 'all' && district === 'all') {
                         document.getElementById('sidebar-title').textContent = 'All Students';
                         document.getElementById('sidebar-subtitle').textContent = 'Overview of all students by district and batch';
                         showAllStudents();
-                    } else {
+                    } else if (batch !== 'all' && district === 'all') {
                         document.getElementById('sidebar-title').textContent = `${batch} Students`;
                         document.getElementById('sidebar-subtitle').textContent = 'Filtered view by selected batch';
                         showBatchStudents(batch);
+                    } else if (batch === 'all' && district !== 'all') {
+                        document.getElementById('sidebar-title').textContent = `${district} Students`;
+                        document.getElementById('sidebar-subtitle').textContent = 'Filtered view by selected district';
+                        showDistrictStudents(studentData.features.filter(f => f.properties.District === district));
+                    } else {
+                        document.getElementById('sidebar-title').textContent = `${batch} - ${district} Students`;
+                        document.getElementById('sidebar-subtitle').textContent = 'Filtered view by batch and district';
+                        const filtered = studentData.features.filter(f => f.properties.Batch === batch && f.properties.District === district);
+                        showDistrictStudents(filtered);
                     }
-                });
+                }
+
+                batchFilter.addEventListener('change', applyFilters);
+                districtFilter.addEventListener('change', applyFilters);
                 
                 function showDistrictStudents(students) {
                     const studentList = document.getElementById('student-list');
