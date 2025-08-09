@@ -17,9 +17,12 @@
     .directory-header {
       background: #4e6aff;
       color: #fff;
-      padding: 32px 0 18px 0;
+      padding: 8px 0 4px 0;
       text-align: center;
       box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
     .directory-title {
       font-size: 2.2rem;
@@ -125,20 +128,47 @@
     }
     @media (max-width: 600px) {
       .directory-header {
-        padding: 18px 0 10px 0;
+        padding: 8px 0 4px 0;
+        position: sticky;
+        top: 0;
+        z-index: 100;
       }
       .directory-title {
-        font-size: 1.2rem;
+        font-size: 1.05rem;
+        line-height: 1.2;
       }
       .directory-subtitle {
-        font-size: 0.95rem;
+        font-size: 0.85rem;
+        line-height: 1.2;
+      }
+      .search-bar {
+        flex-direction: column;
+        gap: 7px;
+        max-width: 98vw;
+        padding: 0 2vw;
+      }
+      .search-bar input, .search-bar select {
+        font-size: 0.98rem;
+        padding: 8px 8px;
+        min-width: 0;
+        width: 100%;
       }
       .directory-list {
         grid-template-columns: 1fr;
-        gap: 12px;
+        gap: 8px;
+        padding: 0 2vw;
       }
       .student-card {
-        padding: 12px 10px 10px 10px;
+        padding: 8px 6px 8px 6px;
+        border-radius: 12px;
+        font-size: 0.97rem;
+      }
+      .student-name {
+        font-size: 1rem;
+      }
+      .student-meta span, .student-meta a {
+        font-size: 0.92rem !important;
+        padding: 2px 7px !important;
       }
     }
   </style>
@@ -294,5 +324,28 @@
       renderDirectory(filtered);
     }
   </script>
+  </body>
+  <footer class="directory-footer">
+    Designed &amp; Developed by <strong>Md Golam Mubasshir Rafi</strong>
+  </footer>
+  <style>
+    .directory-footer {
+      background: #fff;
+      color: #4e6aff;
+      text-align: center;
+      font-size: 15px;
+      padding: 14px 0 10px 0;
+      box-shadow: 0 -1px 8px rgba(78,106,255,0.04);
+    }
+    .directory-footer strong {
+      color: #4e6aff;
+    }
+    @media (max-width: 600px) {
+      .directory-footer {
+        font-size: 13px;
+        padding: 10px 0 7px 0;
+      }
+    }
+  </style>
 </body>
 </html>
