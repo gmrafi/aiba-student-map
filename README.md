@@ -1,7 +1,7 @@
 
 # Army IBA Sylhet Student Home District Map
 
-An interactive web app visualizing the home districts of Army Institute of Business Administration, Sylhet (AIBA Sylhet) students from BBA 7th to 13th batches. The map provides a clean, modern, and minimal interface for exploring student demographics across Bangladesh.
+An interactive web app visualizing the home districts of Army Institute of Business Administration, Sylhet (AIBA Sylhet) students from BBA 1 to every batch. The map provides a clean, modern, and minimal interface for exploring student demographics across Bangladesh. This project is always growing and open to all—new batches and data are added as our community expands.
 
 ## ✨ Features
 
