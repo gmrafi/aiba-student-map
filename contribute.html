@@ -270,6 +270,53 @@
       </div>
     </section>
     <section class="contributors-section">
+    <section style="max-width:700px;margin:28px auto 18px auto;text-align:center;">
+      <style>
+        .contrib-img-row {
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-start;
+          gap: 32px;
+          flex-wrap: wrap;
+          margin: 0;
+          padding: 0;
+          width: 100%;
+        }
+        .contrib-img-row img {
+          width: 48vw;
+          max-width: 900px;
+          min-width: 320px;
+          height: auto;
+          border-radius: 18px;
+          box-shadow: 0 4px 24px rgba(78,106,255,0.13);
+          margin: 0 0 18px 0;
+          object-fit: cover;
+          background: #eaf3f0;
+          display: block;
+        }
+        .contrib-img-row img:first-child {
+          align-self: flex-start;
+        }
+        .contrib-img-row img:last-child {
+          align-self: flex-end;
+        }
+        @media (max-width: 900px) {
+          .contrib-img-row img {
+            width: 98vw;
+            max-width: 98vw;
+            min-width: 0;
+          }
+          .contrib-img-row {
+            flex-direction: column;
+            gap: 18px;
+          }
+        }
+      </style>
+      <div class="contrib-img-row">
+        <img src="photos/1.jpg" alt="Army IBA Sylhet Students">
+        <img src="photos/2.jpg" alt="Army IBA Sylhet Event">
+      </div>
+    </section>
     <div style="text-align:center;margin:32px 0 24px 0;">
       <a href="index.html" style="background:#e0e7ff;color:#4e6aff;font-weight:700;padding:12px 28px;border-radius:10px;text-decoration:none;box-shadow:0 2px 12px rgba(78,106,255,0.10);font-size:1.13rem;display:inline-block;transition:background 0.18s;">
         ← Visit the Homepage Map & Explore Students by District
